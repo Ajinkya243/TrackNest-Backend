@@ -257,7 +257,7 @@ app.get("/report/last-week",async(req,resp)=>{
 app.get("/report/pipeline",async(req,resp)=>{
     try{
         const totalLeads=await Lead.find({status:{$ne:'Closed'}})
-        resp.status(201).json({totalLeads})
+        resp.status(201).json(totalLeads);
     }
     catch(error){
         throw Error(error);
