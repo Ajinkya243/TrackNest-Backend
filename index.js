@@ -101,7 +101,7 @@ app.get("/leads",async(req,resp)=>{
         if(tags){
             filter.tags={ $in: tags.split(",") };
         }
-        const leads=await Lead.find(filter).populate('salesAgent','id name').select("id name source salesAgent status tags timeToClose priority createdAt");
+        const leads=await Lead.find(filter).populate('salesAgent','name email');
         resp.json(leads);
     }
     catch(error){
