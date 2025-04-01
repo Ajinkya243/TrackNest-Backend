@@ -200,6 +200,25 @@ app.get("/agents",async(req,resp)=>{
         throw Error(error.message);
     }
 })
+//llogin
+app.get("/agents/login",async(req,resp)=>{
+    try{
+        const{name,email}=req.query;
+        if (!name || !email) {
+            return resp.status(400).json({ message: "Name and email are required." });
+        }
+        const agent=await SalesAgent.findOne({name:name,email:email});
+        if(agent){
+            resp.json(agent);
+        }
+        else{
+            resp.status(404).json({messsage:'Agent not found'})
+        }
+    }
+    catch(error){
+        throw Error(error)
+    }
+})
 app.get("/agents/:id",async(req,resp)=>{
     try{
         const id=req.params.id;
@@ -263,3 +282,6 @@ app.get("/report/pipeline",async(req,resp)=>{
         throw Error(error);
     }
 })
+
+
+
