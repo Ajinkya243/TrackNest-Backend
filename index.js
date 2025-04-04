@@ -112,7 +112,7 @@ app.get("/leads",async(req,resp)=>{
 app.get("/leads/:id",async(req,resp)=>{
     try{
         const id=req.params.id;
-        const lead=await Lead.findById(id)
+        const lead=await Lead.findById(id).populate("salesAgent","name email");
         resp.send(lead);
     }
     catch(error){
